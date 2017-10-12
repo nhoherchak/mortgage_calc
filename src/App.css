@@ -1,0 +1,30 @@
+#results_list {
+  display: none;
+}
+#fee_amount {
+  display: none;
+}
+#insurance {
+  display: none; 
+}
+
+#results_panel {
+  padding: 20px;
+  margin: 10px;
+  margin-top: 40px;
+}
+
+/* form colors */
+/* label focus color */
+.input-field input[type=number]:focus + label {
+  color: rgb(97, 103, 190);
+}
+/* label underline focus color */
+.input-field input[type=number]:focus {
+  border-bottom: 1px solid rgb(97, 103, 190);
+  box-shadow: 0 1px 0 0 #000;
+}
+
+label {
+  text-align: right;
+}
