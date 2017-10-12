@@ -76,7 +76,7 @@ class App extends Component {
     var downpaymentPercent = this.state.downPayment / this.state.homePrice;
     let insuranceM;
     if (downpaymentPercent < 0.02) {
-      insuranceM = (this.props.homePrice-this.props.downPayment) * 0.01;
+      insuranceM = (this.state.homePrice-this.state.downPayment) * 0.01;
     } else {
       insuranceM = 0;
     }

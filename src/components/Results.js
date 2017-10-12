@@ -31,10 +31,10 @@ class Results extends React.Component {
                     <div> Your monthly income is ${this.props.results.monthlyIncome} before taxes. <br/>
                      Your mortgage will be {this.props.results.numberPayments} monthly payments of
                      ${this.props.results.paymentAmount} </div>
-                    <div> This payment is {this.props.results.percentMonthlyIncome}% of your monthly earnings. </div>
+                    <div> This payment is {this.props.results.percentMonthlyIncome * 100}% of your monthly earnings. </div>
                     <div> Additionally, you must pay ${this.props.results.monthlyFees > 0 ? this.props.results.monthlyFees : 0} in monthly fees
                      and ${this.props.results.mortgageInsurance > 0 ? this.props.results.mortgageInsurance: 0} for mortgage insurance. </div>
-                    <div> This totals to ${this.props.results.totalSpending} per month or {this.props.results.totalPercentMonthlyIncome}% of your monthly income. </div>
+                    <div> This totals to ${this.props.results.totalSpending} per month or {this.props.results.totalPercentMonthlyIncome * 100}% of your monthly income. </div>
                 </div>
                 
             </div>
