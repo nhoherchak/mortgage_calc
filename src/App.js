@@ -71,8 +71,16 @@ class App extends Component {
     const numPayments = this.state.mortgageTerm * 12;
     const interestPercent = this.state.interestRate / 100;
     const mortgageAmount = (this.state.homePrice - this.state.downPayment) * ((interestPercent * (1 + interestPercent) ^ numPayments) / (((1 + interestPercent) ^ numPayments) - 1));
-    const totalSpent = monthlyMortgage + this.state.monthlyFees + this.state.results.mortgageInsurance; //TODO fix insurance ref
     const monthlyMortgage = mortgageAmount/numPayments;
+    
+    var downpaymentPercent = this.state.downPayment / this.state.homePrice;
+    let insuranceM;
+    if (downpaymentPercent < 0.02) {
+      insuranceM = (this.props.homePrice-this.props.downPayment) * 0.01;
+    } else {
+      insuranceM = 0;
+    }
+    const totalSpent = monthlyMortgage + new Number(this.state.feesAmount) + insuranceM;
     
     //add results to props
     this.setState({
@@ -82,7 +90,7 @@ class App extends Component {
         paymentAmount: monthlyMortgage,
         percentMonthlyIncome: monthlyMortgage / monthIncome,
         monthlyFees: this.state.feesAmount,
-        mortgageInsurance: "", //TODO what to do here
+        mortgageInsurance: insuranceM, //TODO what to do here
         totalSpending: totalSpent, //fix insurance ref
         totalPercentMonthlyIncome: totalSpent / monthIncome
       }
@@ -109,7 +117,7 @@ class App extends Component {
 
   checkInsurance(event) {
     var downpaymentPercent = this.state.downPayment / this.state.homePrice;
-    if (downpaymentPercent < 0.2) {
+    if (downpaymentPercent < 0.02) {
       document
         .getElementById('insurance')
         .style
@@ -161,7 +169,7 @@ class App extends Component {
             .bind(this)}
             handleReset={this
             .handleReset
-            .bind(this)}/> {this.state.downPayment / this.state.homePrice}
+            .bind(this)}/>
           <Results results={this.state.results}/>
         </div>
       </div>

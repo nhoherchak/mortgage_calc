@@ -84,8 +84,10 @@ class Form extends React.Component {
                         <label for="downPayment">Down Payment</label>
                     </div>
                 </div>
-                <div id="insurance">
-                    You will need insurance unless you make a larger down payment.  Mortgage insurance will cost about ${this.props.homePrice * 0.01} per month.
+                <div className="row">
+                    <div className="input-field col s8 offset-s1" id="insurance">
+                        You will need insurance unless you make a larger down payment.  Mortgage insurance will cost about ${(this.props.homePrice-this.props.downPayment) * 0.01} per month.
+                    </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s8 offset-s1">

@@ -34,8 +34,7 @@ class Results extends React.Component {
                     <div> This payment is {this.props.results.percentMonthlyIncome}% of your monthly earnings. </div>
                     <div> Additionally, you must pay ${this.props.results.monthlyFees > 0 ? this.props.results.monthlyFees : 0} in monthly fees
                      and ${this.props.results.mortgageInsurance > 0 ? this.props.results.mortgageInsurance: 0} for mortgage insurance. </div>
-                    <div> This totals to ${this.props.results.totalSpending} per month or
-                     {this.props.results.totalPercentMonthlyIncome}% of your monthly income. </div>
+                    <div> This totals to ${this.props.results.totalSpending} per month or {this.props.results.totalPercentMonthlyIncome}% of your monthly income. </div>
                 </div>
                 
             </div>
