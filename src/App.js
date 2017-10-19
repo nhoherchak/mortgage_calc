@@ -17,6 +17,7 @@ class App extends Component {
       mortgageTerm: "",
       interestRate: "",
       firstCheck: true,
+      test: "",
       results: {
         monthlyIncome: "",
         numberPayments: "",
@@ -51,12 +52,14 @@ class App extends Component {
     const value = event.target.value;
 
     this.setState({[name]: value});
-    this.checkInsurance(event);
+    console.log({[name]: value});
+    
+    this.checkInsurance(name, value);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const data = {
+    this.setState({
       annualIncome: this.state.annualIncome,
       homePrice: this.state.homePrice,
       monthlyFees: this.state.monthlyFees,
@@ -64,19 +67,26 @@ class App extends Component {
       downPayment: this.state.downPayment,
       mortgageTerm: this.state.mortgageTerm,
       interestRate: this.state.interestRate
-    };
+    });
     //firebase.database().ref('/notes').push(data, response => response);
     //TODO do some calculation here!!! Results calculations
     const monthIncome = this.state.annualIncome / 12;
     const numPayments = this.state.mortgageTerm * 12;
     const interestPercent = this.state.interestRate / 100;
-    const mortgageAmount = (this.state.homePrice - this.state.downPayment) * ((interestPercent * (1 + interestPercent) ^ numPayments) / (((1 + interestPercent) ^ numPayments) - 1));
+    const mortgageAmount = (Number(this.state.homePrice) - Number(this.state.downPayment)) * 
+                          ((interestPercent * (1 + interestPercent) ^ numPayments) /
+                          (((1 + interestPercent) ^ numPayments) - 1));
     const monthlyMortgage = mortgageAmount/numPayments;
+    console.log(mortgageAmount);
+    console.log(Number(this.state.homePrice) - Number(this.state.downPayment));
+    console.log((interestPercent * (1 + interestPercent) ^ numPayments));
+    console.log(((1 + interestPercent) ^ numPayments) - 1);
     
     var downpaymentPercent = this.state.downPayment / this.state.homePrice;
+    console.log("downpayment percent : " + downpaymentPercent);
     let insuranceM;
     if (downpaymentPercent < 0.02) {
-      insuranceM = (this.state.homePrice-this.state.downPayment) * 0.01;
+      insuranceM = ((this.state.homePrice-this.state.downPayment) * 0.01) / 12;
     } else {
       insuranceM = 0;
     }
@@ -115,8 +125,16 @@ class App extends Component {
     });
   }
 
-  checkInsurance(event) {
-    var downpaymentPercent = this.state.downPayment / this.state.homePrice;
+  checkInsurance(name, value) {
+    let downpaymentPercent;
+    if (name === 'downPayment') {
+      downpaymentPercent = value / this.state.homePrice;
+    } else if (name === 'homePrice') {
+      downpaymentPercent = this.state.downPayment / value;
+    } else {
+      downpaymentPercent = this.state.downPayment / this.state.homePrice;
+    }
+    console.log("downpayment percent : " + downpaymentPercent);
     if (downpaymentPercent < 0.02) {
       document
         .getElementById('insurance')
@@ -132,6 +150,7 @@ class App extends Component {
     /*
     var downpayment = document.getElementById("down_payment");
     var homeprice1 = document.getElementById("home_price");
+    var downpaymentPercent = downpayment / homeprice1;
     
     downpayment.addEventListener("input", function (event) {
       if (email.validity.typeMismatch) {
@@ -140,6 +159,10 @@ class App extends Component {
         email.setCustomValidity("");
       }
     });*/
+  }
+
+  myRound(value, decimals) {
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
   }
 
   render() {
@@ -169,8 +192,14 @@ class App extends Component {
             .bind(this)}
             handleReset={this
             .handleReset
+            .bind(this)}
+            checkInsurance={this
+            .checkInsurance
+            .bind(this)}
+            test={this.state.test}/>
+          <Results results={this.state.results} myRound={this
+            .myRound
             .bind(this)}/>
-          <Results results={this.state.results}/>
         </div>
       </div>
     );

@@ -2,7 +2,7 @@
   "name": "mortgage_calc",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://nhoherchak.github.io/mortgage_calc",
+  "homepage": "http://nhoherchak.github.io/mortgage-calc",
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -17,6 +17,8 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "gh-pages": "^1.0.0"
   }
 }

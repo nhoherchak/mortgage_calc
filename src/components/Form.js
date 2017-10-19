@@ -13,7 +13,9 @@ class Form extends React.Component {
     handleReset(event) {
         this.props.handleReset(event);
     }
-    
+    checkInsurance(event) {
+        this.props.checkInsurance(event);
+    }
 
     render() {
         return (
@@ -27,10 +29,10 @@ class Form extends React.Component {
                         name="annualIncome"
                         type="number"
                         id="annualIncome"
-                        class="validate"
+                        className="validate"
                         value={this.props.annualIncome}
                         onChange={this.props.handleChange}/>
-                        <label for="annualIncome">Annual Income</label>
+                        <label htmlFor="annualIncome">Annual Income</label>
                     </div>
                 </div>
                 <div className="row">
@@ -39,10 +41,10 @@ class Form extends React.Component {
                         name="homePrice"
                         type="number"
                         id="homePrice"
-                        class="validate"
+                        className="validate"
                         value={this.props.homePrice}
                         onChange={this.props.handleChange}/>
-                        <label for="homePrice">Home Price</label>
+                        <label htmlFor="homePrice">Home Price</label>
                     </div>
                 </div>
                 <div className="row">
@@ -51,11 +53,11 @@ class Form extends React.Component {
                         name="monthlyFees"
                         type="checkbox"
                         id="monthlyFees"
-                        class="validate"
+                        className="validate"
                         value={this.props.monthlyFees}
                         onChange={this.props.handleChange}
                         onClick={this.props.showFeeAmount}/>
-                        <label for="monthlyFees">Are there Monthly Fees?</label>
+                        <label htmlFor="monthlyFees">Are there Monthly Fees?</label>
                     </div>
                 </div>
                 <div className="row">
@@ -64,11 +66,11 @@ class Form extends React.Component {
                         name="feesAmount"
                         type="number"
                         id="feesAmount"
-                        class="validate"
+                        className="validate"
                         placeholder="Fees may include Co-op, Building Maintenance, or HOA fees"
                         value={this.props.feesAmount}
                         onChange={this.props.handleChange}/>
-                        <label for="feesAmount">Fees Amount</label>
+                        <label htmlFor="feesAmount">Fees Amount</label>
                     </div>
                 </div>
                 <div className="row" id="down_payment">
@@ -77,16 +79,17 @@ class Form extends React.Component {
                         name="downPayment"
                         type="number"
                         id="downPayment"
-                        class="validate"
+                        className="validate"
                         value={this.props.downPayment}
                         onChange={this.props.handleChange}
                         />
-                        <label for="downPayment">Down Payment</label>
+                        <label htmlFor="downPayment">Down Payment</label>
                     </div>
                 </div>
+
                 <div className="row">
-                    <div className="input-field col s8 offset-s1" id="insurance">
-                        You will need insurance unless you make a larger down payment.  Mortgage insurance will cost about ${(this.props.homePrice-this.props.downPayment) * 0.01} per month.
+                    <div className="input-field col s6 offset-s3 yellow lighten-3" id="insurance">
+                        You will need insurance unless you make a larger down payment.  Mortgage insurance will cost about 1% of the remaining home cost or ${((this.props.homePrice-this.props.downPayment) * 0.01)/12} per month.
                     </div>
                 </div>
                 <div className="row">
@@ -95,10 +98,10 @@ class Form extends React.Component {
                         name="mortgageTerm"
                         type="number"
                         id="mortgageTerm"
-                        class="validate"
+                        className="validate"
                         value={this.props.mortgageTerm}
                         onChange={this.props.handleChange}/>
-                        <label for="mortgageTerm">Mortgage Term</label>
+                        <label htmlFor="mortgageTerm">Mortgage Term</label>
                     </div>
                 </div>
                 <div className="row">
@@ -107,23 +110,23 @@ class Form extends React.Component {
                         name="interestRate"
                         type="number"
                         id="interestRate"
-                        class="validate"
+                        className="validate"
                         value={this.props.interestRate}
                         onChange={this.props.handleChange}/>
-                        <label for="interestRate">Interest Rate</label>
+                        <label htmlFor="interestRate">Interest Rate</label>
                     </div>
                 </div>
 
 
                 <div className="input-field col s2 offset-s1">
-                    <button class="indigo btn waves-effect waves-light" type="submit" name="action">Calculate
-                    <i class="material-icons right">update</i>
+                    <button className="indigo btn waves-effect waves-light" type="submit" name="action">Calculate
+                    <i className="material-icons right">update</i>
                     </button>
                 </div>
 
                 <div className="input-field col s2 offset-s1">
-                    <button class="indigo btn waves-effect waves-light" type="reset" name="action" onClick={this.props.handleReset}>Reset
-                    <i class="material-icons right">reset</i>
+                    <button className="indigo btn waves-effect waves-light" type="reset" name="action" onClick={this.props.handleReset}>Reset
+                    <i className="material-icons right">reset</i>
                     </button>
                 </div>
                 
